@@ -1,8 +1,8 @@
 public class Deque { 
   private final int MAX;
   private int deque[]; 
-  private int nextFront; //index for inserting the next front item
-  private int nextBack; //index for inserting the next back item
+  private int nextFront;
+  private int nextBack;
   private int size;
     
   public Deque(int maxSize){ 
@@ -13,44 +13,39 @@ public class Deque {
     this.size = 0;
   } 
 
-  //Converts a number into a valid index in the circular array
+ 
   private int convertToIndex(int number){
     number %= MAX;
     if (number < 0) number += MAX;
     return number;
   }
 
-  // Checks whether Deque is full or not. 
+ 
   public boolean isFull(){ 
     return (size == MAX);
   } 
-  
-  // Checks whether Deque is empty or not. 
+ 
   public boolean isEmpty(){ 
     return (size == 0);
   } 
   
-  // Inserts an item at the front
   public void insertFront(int item) {
     
     if (isFull()) throw new OverflowException();
-    
     deque[nextFront] = item;
     nextFront = convertToIndex(nextFront - 1);
     size++;
   } 
   
-  // Inserts an item at the back
   public void insertBack(int item) {
     
     if (isFull()) throw new OverflowException();
-    
     deque[nextBack] = item;
     nextBack = convertToIndex(nextBack + 1);
     size++;
   } 
   
-  // Deletes element at front end of Deque 
+  
   public void removeFront() {
     if (isEmpty()) throw new UnderflowException();
     
@@ -58,7 +53,6 @@ public class Deque {
     size--;
   } 
   
-  // Delete element at back end of Deque 
   public void removeBack() {
     if (isEmpty()) throw new UnderflowException();
     
@@ -66,18 +60,18 @@ public class Deque {
     size--;
   } 
   
-  // Returns front element of Deque 
+
   public int getFront(){ 
     int ind = convertToIndex(nextFront + 1);
     return deque[ind];
   } 
   
-  // Returns the last element in the Deque 
   public int getBack(){
     int ind = convertToIndex(nextBack - 1);
     return deque[ind]; 
   } 
 
+  
   @Override
   public String toString() {
     return ("[" + printDeque() + "]");
